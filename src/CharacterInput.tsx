@@ -17,8 +17,8 @@ export interface ICharacterInput extends IInputStyle {
   permenantTextStyle?: StyleSheet.styles,
   autoFocus?: boolean,
   validate: (c: string, pos: number) => boolean
+  initialValue?: string[]
 }
-
 
 export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: ICharacterInput) => {
   if (props.placeHolder.length !== props.showCharBinary.length)
@@ -26,7 +26,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
 
   const inputLength: number = props.placeHolder.length;
   const placeHolderCharArray: string[] = props.placeHolder.split('');
-  const [value, setValue] = React.useState<string[]>(Array(inputLength).fill(''));
+  const [value, setValue] = React.useState<string[]>(props.initialValue ?? Array(inputLength).fill(''));
   const showChar: string[] = props.showCharBinary.split('');
   const singleInputRef: ITypeRef[] = [];
 
