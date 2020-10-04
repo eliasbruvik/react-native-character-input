@@ -12,10 +12,11 @@ export enum MoveType {
 export interface ICharacterInput extends IInputStyle {
   placeHolder: string,
   showCharBinary: string,
-  handleChange: (value: string) => void,
+  handleChange: (value: string[]) => void,
   keyboardType?: string,
   permenantTextStyle?: StyleSheet.styles,
   autoFocus?: boolean,
+  validate: (c: string, pos: number) => boolean
 }
 
 
@@ -40,7 +41,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
   };
 
   React.useEffect(() => {
-    props.handleChange(value.join(''));
+    props.handleChange(value);
   }, [value]);
 
   const updateChangedChar = (index: number, char: string): void => {
@@ -75,7 +76,9 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
   };
 
   const onChange = (inputPos: number, char: string): void => {
-    if (char.length === 1) {
+    if (props.validate && !props.validate(char, inputPos)) {
+      singleInputRef[inputPos].shake();
+    } else if (char.length === 1) {
       traverseInputs(MoveType.Forward, inputPos);
       updateChangedChar(inputPos, char);
     }
