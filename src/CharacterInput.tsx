@@ -52,10 +52,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
 
   const traverseInputs = (moveType: MoveType, charPos: number): void => {
     if (moveType === MoveType.Forward) {
-      if (charPos === inputLength - 1) {
-        singleInputRef[charPos].shake();
-      }
-      else if (charPos >= 0 && charPos < inputLength - 1 && showChar[charPos + 1] === '1') {
+      if (charPos >= 0 && charPos < inputLength - 1 && showChar[charPos + 1] === '1') {
         singleInputRef[charPos + 1].focus();
       }
       else if (charPos + 1 < inputLength - 1) {
