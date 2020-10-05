@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextStyle } from 'react-native';
 
 import SingleInput, { ITypeRef, IInputStyle } from './SingleInput';
 
@@ -14,8 +14,7 @@ export interface ICharacterInput extends IInputStyle {
   showCharBinary: string,
   handleChange: (value: string[]) => void,
   keyboardType?: string,
-  permenantTextStyle?: StyleSheet.styles,
-  autoFocus?: boolean,
+  permenantTextStyle?: TextStyle,
   validate: (c: string, pos: number) => boolean
   initialValue?: string[]
 }
@@ -90,16 +89,6 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
 
   const setInputRef = (inputPos: number, inputRef: ITypeRef): void => {
     singleInputRef[inputPos] = inputRef;
-    
-    // if (props.autoFocus) {
-    //   for (let i = 0; i < showChar.length; i++) {
-    //     const isFirstInput = showChar[i] === '1' && i === inputPos && inputRef;
-    //     if (isFirstInput) {
-    //       singleInputRef[inputPos].focus();
-    //       break;
-    //     }
-    //   }
-    // }
   };
 
   const onKeyPress = (inputPos: number, event: any, inputValue: string): void => {
@@ -148,7 +137,6 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
             value={value[currentCharIndex]}
             onKeyPress={onKeyPress}
             clearInputOnFocus={clearInputOnFocus}
-            autoFocus={props.autoFocus && currentCharIndex === findFirstInputIndex()}
           />
           : <Text
             style={[
