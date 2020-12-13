@@ -64,7 +64,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
     }
     else if (moveType === MoveType.Back) {
       if (charPos === 0) {
-        singleInputRef[charPos].shake();
+        //singleInputRef[charPos].shake();
       }
       else if (charPos > 0 && charPos <= inputLength - 1 && showChar[charPos - 1] === '1') {
         singleInputRef[charPos - 1].focus();
@@ -77,13 +77,13 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
 
   const onChange = (inputPos: number, char: string): void => {
     if (props.validate && !props.validate(char, inputPos)) {
-      singleInputRef[inputPos].shake();
+      //singleInputRef[inputPos].shake();
     } else if (char.length === 1) {
       traverseInputs(MoveType.Forward, inputPos);
       updateChangedChar(inputPos, char);
     }
     else if (char.length > 1) {
-      singleInputRef[inputPos].shake();
+      //singleInputRef[inputPos].shake();
     }
   };
 
@@ -94,7 +94,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
   const onKeyPress = (inputPos: number, event: any, inputValue: string): void => {
     if (event.key === 'Backspace') {
       if (inputPos === 0) {
-        singleInputRef[inputPos].shake();
+        //singleInputRef[inputPos].shake();
       }
       else if (inputPos === inputLength - 1) {
         if (inputValue.length === 0) {
@@ -139,6 +139,7 @@ export const CharacterInput: React.FunctionComponent<ICharacterInput> = (props: 
             clearInputOnFocus={clearInputOnFocus}
           />
           : <Text
+            key={currentCharIndex}
             style={[
               {
                 color: 'grey',
